@@ -71,7 +71,7 @@ echo $page = file_get_contents_utf8($url, $encoding);
     <h2>Feed Item Configuration</h2>
     <input  size="80" type='text' name='title' placeholder="Title of the item" />
     <input  size="80" type='text' name='description' placeholder="Description of the item" />
-	<input  size="80" type='text' name='image' placeholder="image of the item" />
+    <input  size="80" type='text' name='image' placeholder="image of the item" />
     <input size="80"  type='text' name='link' placeholder="Link of the item" />
     <input size="80"  type='text' name='date' placeholder="Publishing Date of the item - Leave Blank if not sure" />
     
