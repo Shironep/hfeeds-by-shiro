@@ -163,7 +163,7 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
         $item->addChild('pubDate', $date);
         $guid = $item->addChild('guid', $link);
         $guid->addAttribute('isPermalink','true');
-         //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $link . '   =   ' . $date . '<br>';
+         //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image . '   =   ' . $link . '   =   ' . $date . '<br>';
     }
     // echo '<br>------END-----<br>';
 }
