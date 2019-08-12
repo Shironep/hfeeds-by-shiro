@@ -74,7 +74,7 @@ echo $page = file_get_contents_utf8($url, $encoding);
     <input size="80" type='text' name='image' placeholder="image of the item" />
     <input size="80" type='text' name='link' placeholder="Link of the item" />
     <input size="80" type='text' name='date' placeholder="date article - if u leave this box in blank u will have problems with the feed /(like: feed reader don't will know which is old or new)/" />
-	<input size="80" type='text' name='special_placeholder' placeholder="special area if u need - leave blank if u don't need!" />
+    <input size="80" type='text' name='box1' placeholder="special area if u need - leave blank if u don't need!" />
     
     
   <input type="submit" />
