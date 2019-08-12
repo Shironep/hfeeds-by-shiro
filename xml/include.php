@@ -90,7 +90,7 @@ function cleanPat($pattern, $flag = 0) {
 
 /* To create XML DOM for RSS ... */
 
-function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate, $itBox1, $channel) {
+function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate, $channel) {
     /*
 
      * $match = array containing elements to be printed
@@ -100,27 +100,24 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
 
     $tmpTitle = $itTitle;
     $tmpDesc = $itDescription;
-    $tmpImage = $itImage;
+	$tmpImage = $itImage;
     $tmpLink = $itLink;
     if ($itDate == '')
         $tmpDate = date("d M Y - h:i:s A");
     else
         $tmpDate = $itDate;
-    $tmpBox1 = $itBox1;
 
     $itTitle = cleanItemPat($itTitle);
     $itDescription = cleanItemPat($itDescription);
-    $itImage = cleanItemPat($itImage);
+	$itImage = cleanItemPat($itImage);
     $itLink = cleanItemPat($itLink);
     $itDate = cleanItemPat($itDate);
-    $itBox1 = cleanItemPat($itBox1);
 
     $titleCount = count($itTitle);
     $descCount = count($itDescription);
-    $imageCount = count($itImage);
+	$imageCount = count($itImage);
     $linkCount = count($itLink);
     $dateCount = count($itDate);
-    $box1Count = count($itBox1);
 
 
     //echo '<br>------BELOW-----<br>';
@@ -131,7 +128,6 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
 		$image = $tmpImage;
         $link = $tmpLink;
         $date = $tmpDate;
-		$box1 = $tmpBox1;
 
         //For Title
         for ($i = 0; $i < $titleCount; $i++) {
@@ -145,9 +141,9 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
             $description = str_replace('{' . $itDescription[$i] . '}', $match[$j][$itDescription[$i]], $description);
         }
 	    //For Image
-	for ($i = 0; $i < $imageCount; $i++) {
+		for ($i = 0; $i < $imageCount; $i++) {
 			
-	    $image = str_replace('{' . $itImage[$i] . '}', $match[$j][$itImage[$i]], $image);
+			$image = str_replace('{' . $itImage[$i] . '}', $match[$j][$itImage[$i]], $image);
 		}
         //For Link
         for ($i = 0; $i < $linkCount; $i++) {
@@ -157,22 +153,17 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
         for ($i = 0; $i < $dateCount; $i++) {
             $date = str_replace('{' . $itDate[$i] . '}', $match[$j][$itDate[$i]], $date);
         }
-	//For Date
-        for ($i = 0; $i < $box1Count; $i++) {
-            $box1 = str_replace('{' . $itBox1[$i] . '}', $match[$j][$itBox1[$i]], $box1);
-        }
 
         $item = $channel->addChild('item');
 
         $item->addChild('title', $title);
         $item->addChildWithCDATA('description', $description);
-	$item->addChild('image', $image);
+		$item->addChild('image', $image);
         $item->addChild('link', $link);
         $item->addChild('pubDate', $date);
         $guid = $item->addChild('guid', $link);
         $guid->addAttribute('isPermalink','true');
-        $item->addChild('box1', $box1);
-         //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image . '   =   ' . $link . '   =   ' . $date . '   =   ' . $box1 . '<br>';
+         //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image . '   =   ' . $link . '   =   ' . $date . '<br>';
     }
     // echo '<br>------END-----<br>';
 }

@@ -43,11 +43,9 @@ fputs($file, '<?php '
         . 'include_once("./default.php");'
         . '$channel->addChild("title","' . $_POST['feedTitle'] . '");'
         . '$channel->addChild("description","' . $_POST['feedDesc'] . '");'
-		. '$channel->addChild("image","' . $image . '");'
-		. '$image="' . $image . '";'
+		. '$channel->addChild("image","' . $_POST['feedimg'] . '");'
         . '$channel->addChild("link","' . $url . '");'
         . '$url="' . $url . '";'
-        . '$channel->addChild("box1","' . $_POST['box1']");
         . '$page = str_replace("\n", " ", file_get_contents_utf8($url));'
 );
 
@@ -56,7 +54,6 @@ $itDescription = $_POST['description'];
 $itImage = $_POST['image'];
 $itLink = $_POST['link'];
 $itDate = $_POST['date'];
-$itBox1 = $_POST['box1'];
 
 echo '<div align="center"><div id="raw-data">';
 if ($_POST['out_pattern1'] != '' and $_POST['pattern1'] != '') {
@@ -67,13 +64,11 @@ if ($_POST['out_pattern1'] != '' and $_POST['pattern1'] != '') {
             . '";$itImage="' . $_POST['image']
             . '";$itLink="' . $_POST['link']
             . '";$itDate="' . $_POST['date']
-            . '";$itBox1"' . $_POST['box1']
-			 
-            . '";print_xml_item(process(1), $itTitle, $itDescription, $itImage, $itLink, $itDate, $itBox1,$channel);';
+            . '";print_xml_item(process(1), $itTitle, $itDescription, $itImage, $itLink, $itDate,$channel);';
     fputs($file, $str);
     $match = process(1);
 
-    print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itBox1, $itDate);
+    print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate);
 }
 if ($_POST['out_pattern2'] != '' and $_POST['pattern2'] != '') {
     $str = '$g2="' . cleanPat(htmlentities($_POST['out_pattern2']), 1)
@@ -83,12 +78,11 @@ if ($_POST['out_pattern2'] != '' and $_POST['pattern2'] != '') {
             . '";$itImage="' . $_POST['image']
             . '";$itLink="' . $_POST['link']
             . '";$itDate="' . $_POST['date']
-            . '";$itBox1"' . $$_POST['box1']
-            . '";print_xml_item(process(2), $itTitle, $itDescription, $itImage, $itLink, $itDate, $itBox1,$channel);';
+            . '";print_xml_item(process(2), $itTitle, $itDescription, $itImage, $itLink, $itDate,$channel);';
     fputs($file, $str);
     $match = process(2);
 
-    print_xml_item($match, $itTitle, $itDescription, $itLink, $itDate, $itBox1);
+    print_xml_item($match, $itTitle, $itDescription, $itLink, $itDate);
 }
 if ($_POST['out_pattern3'] != '' and $_POST['pattern3'] != '') {
     $str = '$g3="' . cleanPat(htmlentities($_POST['out_pattern3']), 1)
@@ -98,13 +92,11 @@ if ($_POST['out_pattern3'] != '' and $_POST['pattern3'] != '') {
             . '";$itImage="' . $_POST['image']
             . '";$itLink="' . $_POST['link']
             . '";$itDate="' . $_POST['date']
-            . '";$itBox1="' . $_POST['box1']
-
-            . '";print_xml_item(process(3), $itTitle, $itDescription, $itImage, $itLink, $itDate,  $itBox1$channel);';
+            . '";print_xml_item(process(3), $itTitle, $itDescription, $itImage, $itLink, $itDate,$channel);';
     fputs($file, $str);
     $match = process(3);
 
-    print_xml_item($match, $itTitle, $itDescription, $itLink, $itDate, $itBox1);
+    print_xml_item($match, $itTitle, $itDescription, $itLink, $itDate);
 }
 if ($_POST['out_pattern4'] != '' and $_POST['pattern4'] != '') {
     $str = '$g4="' . cleanPat(htmlentities($_POST['out_pattern4']), 1)
@@ -114,11 +106,11 @@ if ($_POST['out_pattern4'] != '' and $_POST['pattern4'] != '') {
             . '";$itImage="' . $_POST['image']
             . '";$itLink="' . $_POST['link']
             . '";$itDate="' . $_POST['date']
-            . '";print_xml_item(process(4), $itTitle, $itDescription, $itImage, $itLink, $itDate, $itBox1,$channel);';
+            . '";print_xml_item(process(4), $itTitle, $itDescription, $itImage, $itLink, $itDate,$channel);';
     fputs($file, $str);
     $match = process(4);
 
-    print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate, $itBox1);
+    print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate);
 }
 
 fputs($file, 'echo $xml->asXML(); ?>');
@@ -232,7 +224,6 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
     $itLink = cleanItemPat($itLink);
     if ($itDate != '')
         $itDate = cleanItemPat($itDate);
-	$itBox1 = cleanItemPat($itBox1);
 
     $tmpdate = date("d M Y - h:i:s A");
     $titleCount = count($itTitle);
@@ -240,7 +231,6 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
 	$imageCount = count($itImage);
     $linkCount = count($itLink);
     $dateCount = count($itDate);
-	$box1Count = count($itBox1);
 
 
 
@@ -254,7 +244,6 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
             $date = $tmpdate;
         else
             $date = $_POST['date'];
-		$box1 = $_POST['box1'];
 
         //For Title
         for ($i = 0; $i < $titleCount; $i++) {
@@ -280,13 +269,8 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
             for ($i = 0; $i < $dateCount; $i++) {
                 $date = str_replace('{' . $itDate[$i] . '}', $match[$j][$itDate[$i]], $date);
             }
-        //Special Box
-        if ($itBox1 != '')
-            for ($i = 0; $i < $box1Count; $i++) {
-                $date = str_replace('{' . $itBox1[$i] . '}', $match[$j][$itBox1[$i]], $box1);
-            }
 
-        //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image. '   =   ' . $link . '   =   ' . $date . '   =   ' . $box1 . '<br>';
+        //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image. '   =   ' . $link . '   =   ' . $date . '<br>';
     }
 }
 
