@@ -90,7 +90,7 @@ function cleanPat($pattern, $flag = 0) {
 
 /* To create XML DOM for RSS ... */
 
-function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate, $channel) {
+function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $itDate, $itBox1, $channel) {
     /*
 
      * $match = array containing elements to be printed
@@ -106,18 +106,21 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
         $tmpDate = date("d M Y - h:i:s A");
     else
         $tmpDate = $itDate;
+	$tmpBox1 = $itBox1;
 
     $itTitle = cleanItemPat($itTitle);
     $itDescription = cleanItemPat($itDescription);
 	$itImage = cleanItemPat($itImage);
     $itLink = cleanItemPat($itLink);
     $itDate = cleanItemPat($itDate);
+	$itBox1 = cleanItemPat($itBox1);
 
     $titleCount = count($itTitle);
     $descCount = count($itDescription);
 	$imageCount = count($itImage);
     $linkCount = count($itLink);
     $dateCount = count($itDate);
+	$box1Count = count($itBox1);
 
 
     //echo '<br>------BELOW-----<br>';
@@ -128,6 +131,7 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
 		$image = $tmpImage;
         $link = $tmpLink;
         $date = $tmpDate;
+		$box1 = $tmpBox1;
 
         //For Title
         for ($i = 0; $i < $titleCount; $i++) {
@@ -153,6 +157,10 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
         for ($i = 0; $i < $dateCount; $i++) {
             $date = str_replace('{' . $itDate[$i] . '}', $match[$j][$itDate[$i]], $date);
         }
+		//For Date
+        for ($i = 0; $i < $box1Count; $i++) {
+            $box1 = str_replace('{' . $itBox1[$i] . '}', $match[$j][$itBox1[$i]], $box1);
+        }
 
         $item = $channel->addChild('item');
 
@@ -163,7 +171,8 @@ function print_xml_item($match, $itTitle, $itDescription, $itImage, $itLink, $it
         $item->addChild('pubDate', $date);
         $guid = $item->addChild('guid', $link);
         $guid->addAttribute('isPermalink','true');
-         //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image . '   =   ' . $link . '   =   ' . $date . '<br>';
+		$item->addChild('box1', $box1);
+         //echo $j . ' ---= ' . $title . '   =   ' . $description . '   =   ' . $image . '   =   ' . $link . '   =   ' . $date . '   =   ' . $box1 . '<br>';
     }
     // echo '<br>------END-----<br>';
 }

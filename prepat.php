@@ -69,42 +69,15 @@ echo $page = file_get_contents_utf8($url, $encoding);
 
 
     <h2>Feed Item Configuration</h2>
-    <input  size="80" type='text' name='title' placeholder="Title of the item" />
-    <input  size="80" type='text' name='description' placeholder="Description of the item" />
-    <input  size="80" type='text' name='image' placeholder="image of the item" />
-    <input size="80"  type='text' name='link' placeholder="Link of the item" />
-    <input size="80"  type='text' name='date' placeholder="Publishing Date of the item - Leave Blank if not sure" />
+    <input size="80" type='text' name='title' placeholder="Title of the item" />
+    <input size="80" type='text' name='description' placeholder="Description of the item" />
+    <input size="80" type='text' name='image' placeholder="image of the item" />
+    <input size="80" type='text' name='link' placeholder="Link of the item" />
+    <input size="80" type='text' name='date' placeholder="date article - if u leave this box in blank u will have problems with the feed /(like: feed reader don't will know which is old or new)/" />
+	<input size="80" type='text' name='special_placeholder' placeholder="special area if u need - leave blank if u don't need!" />
     
     
   <input type="submit" />
         </pre>
     </form>
-</div>
-<div class="feed-help">
-    <h2>Help is Here!</h2>
-    <h4>Global Pattern</h4>
-    This pattern decides which block to select from a given page. Represents a
-    unique pattern from a given page, which contains the repeatable pattern.
-    <br>Only one {h} variable can be used here, for example;<br>
-    &lt;div id="left_content"&gt;{h}&lt;p class='second'&gt;<br>
-    <strong>If not sure, enter {h}</strong> to select the whole page.
-    <h4>Repeatable Pattern</h4>
-    Pattern to define each item (inside the block defined by corresponding global pattern).
-    Multiples of {i} & {h} may be used. For example;
-    <br>
-    &lt;a href="{h}"{i}title="{h}"{i}&gt;{h}&lt;/a&gt;
-    <h4>Feed Configuration</h4>
-    Details about the web-page this feed is being created for.
-    Title, Description &amp; Source Link of the page are reflected in the 
-    RSS XML feed.
-    <h4>Feed Item Configuration</h4>
-    Configure the items for the feed. Each Item contains a TITLE, 
-    DESCRIPTION, a LINK &amp; optionally the publishing DATE.
-    Here you have to use the variable names as {h1}, {h2}, {h3} etc.
-    If not sure as what should be the title, just click Submit, see the 
-    results on the next page and come back to this page.
-    For example, the title may be {h3}, link may be {h1}, description may be {h2},
-    as per the example above.
-
-
 </div>
