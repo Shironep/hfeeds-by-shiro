@@ -57,10 +57,8 @@ echo $page = file_get_contents_utf8($url, $encoding);
     <form method="POST" action="pattern.php?file=<?php echo $_GET['file']; ?>">
         <pre>
     <textarea placeholder="Enter global pattern 1" name="out_pattern1"></textarea><textarea placeholder="Enter repeatable pattern 1" name = "pattern1"></textarea>
-    <textarea placeholder="Enter global pattern 2" name="out_pattern2"></textarea><textarea placeholder="Enter repeatable pattern 2" name = "pattern2"></textarea>
-    <textarea placeholder="Enter global pattern 3" name="out_pattern3"></textarea><textarea placeholder="Enter repeatable pattern 3" name = "pattern3"></textarea>
-    <textarea placeholder="Enter global pattern 4" name="out_pattern4"></textarea><textarea placeholder="Enter repeatable pattern 4" name = "pattern4"></textarea>
-    <input type="hidden" value="<?php echo $url; ?>" name = "url">
+
+   <input type="hidden" value="<?php echo $url; ?>" name = "url">
     
     <h2>Feed Configuration</h2>
     <input size="80"  type='text' name='feedTitle' placeholder="Title of the feed" />
