@@ -17,18 +17,7 @@ function process($index) {
             $globalPat = $GLOBALS['g1'];
             $repeatPat = $GLOBALS['r1'];
             break;
-        case 2:
-            $globalPat = $GLOBALS['g2'];
-            $repeatPat = $GLOBALS['r2'];
-            break;
-        case 3:
-            $globalPat = $GLOBALS['g3'];
-            $repeatPat = $GLOBALS['r3'];
-            break;
-        case 4:
-            $globalPat = $GLOBALS['g4'];
-            $repeatPat = $GLOBALS['r4'];
-            break;
+
         default:
             return(-1);
     }
